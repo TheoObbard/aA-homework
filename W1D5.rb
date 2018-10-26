@@ -1,17 +1,36 @@
 class Stack
+
+  attr_accessor :the_stack
+
   def initialize
-    # create ivar to store stack here!
+    @the_stack = []
   end
 
   def push(el)
-    # adds an element to the stack
+    @the_stack.push(el)
   end
 
   def pop
-    # removes one element from the stack
+    @the_stack.pop
   end
 
   def peek
-    # returns, but doesn't remove, the top element in the stack
+    return @the_stack[-1]
   end
 end
+
+stack = Stack.new
+
+p stack.the_stack
+stack.push(5)
+p stack.the_stack
+stack.push(8)
+p stack.the_stack
+stack.pop
+p stack.the_stack
+stack.push(4)
+stack.push(5)
+stack.push(6)
+p stack.the_stack
+p stack.peek
+p stack.the_stack
