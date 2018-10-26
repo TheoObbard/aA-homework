@@ -19,18 +19,35 @@ class Stack
   end
 end
 
-stack = Stack.new
+class Queue
 
-p stack.the_stack
-stack.push(5)
-p stack.the_stack
-stack.push(8)
-p stack.the_stack
-stack.pop
-p stack.the_stack
-stack.push(4)
-stack.push(5)
-stack.push(6)
-p stack.the_stack
-p stack.peek
-p stack.the_stack
+  attr_accessor :queue
+
+  def initialize
+    @queue = []
+  end
+
+  def enqueue(el)
+    @queue.unshift(el)
+  end
+
+  def dequeue
+    @queue.pop
+  end
+
+  def peek
+    return @queue[-1]
+  end
+
+end
+
+q = Queue.new
+
+p q.queue
+q.enqueue(4)
+q.enqueue(5)
+q.enqueue(6)
+p q.queue
+q.dequeue
+p q.queue
+p q.peek
