@@ -41,13 +41,52 @@ class Queue
 
 end
 
-q = Queue.new
+class Map
 
-p q.queue
-q.enqueue(4)
-q.enqueue(5)
-q.enqueue(6)
-p q.queue
-q.dequeue
-p q.queue
-p q.peek
+  attr_accessor :map
+
+  def initialize
+    @map = []
+  end
+
+  def set(key, value)
+    @map.each_with_index do |pair, ind|
+      return @map[ind] == [key, value] if key == pair[0]
+    end
+    @map << [key, value]
+  end
+
+  def get(key)
+    @map.each do |pair|
+      return pair[1] if pair[0] == key
+    end
+    return nil
+  end
+
+  def delete(key)
+    @map.each do |pair|
+      @map.delete(pair) if pair[0] == key
+    end
+  end
+
+  def show
+    p @map
+  end
+
+end
+
+m = Map.new
+
+
+# p m.map
+# m.set("thing", "gy")
+# p m.map
+# m.set(:sym, "bol")
+# p m.map
+# m.set(800, "lupolicut")
+# p m.map
+# p m.get(:sym)
+# p m.map
+# m.delete("thing")
+# p m.map
+# m.show
