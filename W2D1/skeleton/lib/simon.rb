@@ -28,23 +28,32 @@ class Simon
 
   def show_sequence
     add_random_color
+    p seq.last
   end
 
   def require_sequence
-
+    p "Please enter the color...s"
+    @seq.each do |color|
+      ans = gets.chomp
+      unless ans == color
+        @game_over = true
+        break
+      end
+    end
+    system("clear")
+    p @game_over ? "Aaaaaaand you messed up." : "Noice, on to the next!"
   end
 
   def add_random_color
-    colors = %w(red blue yellow green)
-    @seq.push(colors.sample)
+    @seq.push(COLORS.sample)
   end
 
   def round_success_message
-
+    p "You've survived this round... but will you survive the next?"
   end
 
   def game_over_message
-
+    p "Womp womp, you lost :( "
   end
 
   def reset_game
@@ -53,3 +62,6 @@ class Simon
     @game_over = false
   end
 end
+
+# testing = Simon.new
+# testing.play
