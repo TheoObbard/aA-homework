@@ -54,13 +54,22 @@ def dominant_octopus(fish)
 end
 
 fish = ['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'fiiiissshhhhhh', 'fsh', 'ffiiiiisshh']
-p dominant_octopus(fish)
+# p dominant_octopus(fish)
 
 # Clever Octopus
 #
 # Find the longest fish in O(n) time. The octopus can hold on to the longest fish
 # that you have found so far while stepping through the array only once.
-#
+
+def clever_octopus(fish)
+  longest = ''
+  fish.each { |nemo| longest = nemo if nemo.length > longest.length}
+  longest
+end
+
+fish = ['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'fiiiissshhhhhh', 'fsh', 'ffiiiiisshh']
+# p clever_octopus(fish)
+
 # Dancing Octopus
 #
 # Full of fish, the Octopus attempts Dance Dance Revolution. The game has tiles in
@@ -81,6 +90,14 @@ p dominant_octopus(fish)
 #
 # slow_dance("right-down", tiles_array)
 # > 3
+
+def slow_dance(direction, tiles_array)
+  tiles_array.each_with_index { |dir, ind| return ind if dir == direction }
+end
+
+tiles_array = ["up", "right-up", "right", "right-down", "down", "left-down", "left",  "left-up"]
+p slow_dance("up", tiles_array)
+
 # Constant Dance!
 #
 # Now that the octopus is warmed up, let's help her dance faster. Use a different
@@ -91,3 +108,20 @@ p dominant_octopus(fish)
 #
 # fast_dance("right-down", new_tiles_data_structure)
 # > 3
+
+def constant_dance(direction, new_tiles_data_structure)
+  new_tiles_data_structure[direction]
+end
+
+new_tiles_data_structure = {
+  "up" => 0,
+  "right-up" => 1,
+  "right" => 2,
+  "right-down" => 3,
+  "down" => 4,
+  "left-down" => 5,
+  "left" => 6,
+  "left-up" => 7
+}
+
+p constant_dance("right", new_tiles_data_structure)
