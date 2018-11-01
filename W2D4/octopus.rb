@@ -8,12 +8,54 @@
 #
 # Find the longest fish in O(n^2) time. Do this by comparing all fish lengths to
 #  all other fish lengths
-#
+
+def octopus(fishies)
+  longest = ""
+  fishies.each do |fish|
+    fishies.each do |nemo|
+      longest = fish if fish.length > nemo.length && fish.length > longest.length
+    end
+  end
+  longest
+end
+
+fish = ['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'fiiiissshhhhhh', 'fsh', 'ffiiiiisshh']
+# p octopus(fish)
+
 # Dominant Octopus
 #
 # Find the longest fish in O(n log n) time. Hint: You saw a sorting algorithm that
 # runs in O(n log n) in the Sorting Demo. Remember that Big O is classified by the dominant term.
-#
+
+def merge_fish(fishies)
+  return fishies if fishies.length < 2
+
+  mid = fishies.length/2
+  head = merge_fish(fishies[0...mid])
+  tail = merge_fish(fishies[mid..-1])
+  merge(head, tail)
+end
+
+def merge(head, tail)
+  if head.empty?
+    tail
+  elsif tail.empty?
+    head
+  elsif head.first.length > tail.first.length
+    [tail.first] + merge(head, tail[1..-1])
+  else
+    [head.first] + merge(head[1..-1], tail)
+  end
+end
+
+def dominant_octopus(fish)
+  sorted = merge_fish(fish)
+  sorted[-1]
+end
+
+fish = ['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'fiiiissshhhhhh', 'fsh', 'ffiiiiisshh']
+p dominant_octopus(fish)
+
 # Clever Octopus
 #
 # Find the longest fish in O(n) time. The octopus can hold on to the longest fish
