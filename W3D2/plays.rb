@@ -70,13 +70,52 @@ end
 
 class Playwrights
 
-
-  # Playwright::all
-  # Playwright::find_by_name(name)
+  def initialize; end
   # Playwright#new (this is the initialize method)
-  # Playwright#create
-  # Playwright#update
-  # Playwright#get_plays (returns all plays written by playwright)
 
+
+  def self.all
+    PlayDBConnection.instance.execute(<<-SQL)
+      SELECT *
+      FROM playwrights
+    SQL
+  end
+  # Playwright::all
+
+  def self.find_by_name(name)
+    PlayDBConnection.instance.execute(<<-SQL, name)
+      SELECT *
+      FROM playwrights
+      WHERE name = ?
+    SQL
+  end
+  # Playwright::find_by_name(name)
+
+  def create(name, birth_year = nil)
+    PlayDBConnection.instance.execute(<<-SQL, name, birth_year)
+      INSERT INTO playwrights (name, birth_year) VALUES (?, ?)
+    SQL
+  end
+  # Playwright#create
+
+  def update(id, name, birth_year)
+    PlayDBConnection.instance.execute(<<-SQL, name, birth_year, id)
+      UPDATE playwrights
+      SET name = ?, birth_year = ?
+      WHERE id = ?
+    SQL
+  end
+  # Playwright#update
+
+  def get_plays(name)
+    PlayDBConnection.instance.execute(<<-SQL, name)
+      SELECT title
+      FROM playwrights w
+      JOIN plays p
+      ON w.id = p.playwright_id
+      WHERE name = ?
+    SQL
+  end
+  # Playwright#get_plays (returns all plays written by playwright)
 
 end
