@@ -1,0 +1,21 @@
+<p>Make An Account</p>
+
+<!-- <%= render "sessions/form" %> -->
+
+<form class="" action="<%=users_url%>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label>
+    <p>email</p>
+    <input type="text" name="user[email]" value="">
+  </label>
+  <br>
+  <label>
+    <p>password</p>
+    <input type="text" name="user[password]" value="">
+  </label>
+  <br>
+  <input type="submit" name="" value="sign up">
+</form>
+
+<p>Already a user?</p>
+<a href="/session/new"><input type="submit" value="log in"></a>
