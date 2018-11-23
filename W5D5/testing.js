@@ -43,5 +43,9 @@
 // });
 
 
-tes = 'yo'
-console.log(tes instanceof String)
+// tes = 'yo'
+// console.log(tes instanceof String)
+
+// window.setTimeout(() => {
+//   alert('HAMMERTIME')
+// }, 5000)
