@@ -5,6 +5,9 @@ class Calculator extends React.Component {
     super(props);
     this.state = {num1: "", num2: "", result: 0};
     this.sum = this.sum.bind(this);
+    this.subtract = this.subtract.bind(this);
+    this.multiply = this.multiply.bind(this);
+    this.divide = this.divide.bind(this);
     this.changeInput1 = this.changeInput1.bind(this);
     this.changeInput2 = this.changeInput2.bind(this);
   }
@@ -21,7 +24,27 @@ class Calculator extends React.Component {
     let num1 = this.state.num1;
     let num2 = this.state.num2
     let ans = parseInt(num1) + parseInt(num2)
-    // console.log(num1, num2)
+    this.setState({result: ans})
+  }
+
+  subtract() {
+    let num1 = this.state.num1;
+    let num2 = this.state.num2
+    let ans = parseInt(num1) - parseInt(num2)
+    this.setState({result: ans})
+  }
+
+  multiply() {
+    let num1 = this.state.num1;
+    let num2 = this.state.num2
+    let ans = parseInt(num1) * parseInt(num2)
+    this.setState({result: ans})
+  }
+
+  divide() {
+    let num1 = this.state.num1;
+    let num2 = this.state.num2
+    let ans = parseInt(num1) / parseInt(num2)
     this.setState({result: ans})
   }
 
@@ -31,8 +54,18 @@ class Calculator extends React.Component {
         <h1>{this.state.result}</h1>
         <input type='text' onChange={this.changeInput1}></input>
         <input type='text' onChange={this.changeInput2}></input>
+        <br />
         <button className="button" onClick={this.sum}>
-          HIT DA BUTTON
+          +
+        </button>
+        <button className="button" onClick={this.subtract}>
+          -
+        </button>
+        <button className="button" onClick={this.multiply}>
+          *
+        </button>
+        <button className="button" onClick={this.divide}>
+          /
         </button>
       </div>
     );
