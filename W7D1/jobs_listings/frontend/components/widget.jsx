@@ -35,6 +35,7 @@ class Widget extends React.Component {
     // get the store's current state and deconstruct it into 'jobs'
     // and 'city' variables
     const { city, jobs } = this.props.store.getState();
+    
     const cityOptions = this.cities.map(city => (
         <button onClick={ () => { this.fetchJobListings(city) }}
              key={city}
@@ -64,7 +65,7 @@ class Widget extends React.Component {
           Location:
           {cityOptions}
         </div>
-        
+
         <h3>{jobListings.length} Job Listings</h3>
         <ol className="listings-list">
             {jobListings}
