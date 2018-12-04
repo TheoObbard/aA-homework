@@ -1205,24 +1205,46 @@ __webpack_require__.r(__webpack_exports__);
 
 document.addEventListener('DOMContentLoaded', function () {
   var preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {};
-  var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
-  store.dispatch = addLoggingToDispatch(store);
+  var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState); // store.dispatch = addLoggingToDispatch(store);
+
+  store = applyMiddlewares(store, [addLoggingToDispatch]);
   var root = document.getElementById('content');
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
   }), root);
-});
+}); // function addLoggingToDispatch(store) {
+//   const dp = store.dispatch;
+//   return function (action) {
+//     console.log("before", store.getState());
+//     console.log({action});
+//     dp(action);
+//     console.log("after", store.getState());
+//   };
+// }
 
-function addLoggingToDispatch(store) {
-  var dp = store.dispatch;
-  return function (action) {
-    console.log("before", store.getState());
-    console.log({
-      action: action
-    });
-    dp(action);
-    console.log("after", store.getState());
+var addLoggingToDispatch = function addLoggingToDispatch(store) {
+  return function (next) {
+    return function (action) {
+      console.log("before", store.getState());
+      console.log({
+        action: action
+      });
+      store.dispatch(action);
+      console.log("after", store.getState());
+    };
   };
+};
+
+function applyMiddlewares(store, middlewares) {
+  var dispatch = store.dispatch;
+
+  for (var i = 0; i < middlewares.length; i++) {
+    dispatch = middlewares[i](store)(dispatch);
+  }
+
+  return Object.assign({}, store, {
+    dispatch: dispatch
+  });
 }
 
 /***/ }),
