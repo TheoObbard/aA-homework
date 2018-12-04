@@ -24,12 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
 //   };
 // }
 
-const addLoggingToDispatch = store => next => action => {
-  console.log("before", store.getState());
-  console.log({action});
-  store.dispatch(action);
-  console.log("after", store.getState());
-}
+// const addLoggingToDispatch = store => next => action => {
+//   console.log("before", store.getState());
+//   console.log({action});
+//   store.dispatch(action);
+//   console.log("after", store.getState());
+// }
 
 function applyMiddlewares(store, middlewares) {
   var dispatch = store.dispatch;

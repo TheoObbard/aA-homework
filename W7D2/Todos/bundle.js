@@ -1180,6 +1180,19 @@ var configureStore = function configureStore() {
   return store;
 };
 
+var addLoggingToDispatch = function addLoggingToDispatch(store) {
+  return function (next) {
+    return function (action) {
+      console.log("before", store.getState());
+      console.log({
+        action: action
+      });
+      store.dispatch(action);
+      console.log("after", store.getState());
+    };
+  };
+};
+
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
 
 /***/ }),
@@ -1221,19 +1234,12 @@ document.addEventListener('DOMContentLoaded', function () {
 //     console.log("after", store.getState());
 //   };
 // }
-
-var addLoggingToDispatch = function addLoggingToDispatch(store) {
-  return function (next) {
-    return function (action) {
-      console.log("before", store.getState());
-      console.log({
-        action: action
-      });
-      store.dispatch(action);
-      console.log("after", store.getState());
-    };
-  };
-};
+// const addLoggingToDispatch = store => next => action => {
+//   console.log("before", store.getState());
+//   console.log({action});
+//   store.dispatch(action);
+//   console.log("after", store.getState());
+// }
 
 function applyMiddlewares(store, middlewares) {
   var dispatch = store.dispatch;
