@@ -2,13 +2,10 @@ import { RECEIVE_SEARCH_GIPHYS } from '../actions/giphy_actions';
 
 const initialState = []
 
-const giphysReducer = (state = initialState, action) => {
-  var resp = {};
+const giphysReducer = function(state = initialState, action) {
   switch (action.type) {
     case RECEIVE_SEARCH_GIPHYS:
-      resp = Object.assign({}, state);
-      resp.giphys = action.giphys;
-      return resp;
+      return action.giphys;
     default:
       return state;
   }
